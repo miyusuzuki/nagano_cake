@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
   devise_for :customers, skip: [:passwords], controllers: {
@@ -7,17 +7,19 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
 }
 
- get  'admin' => 'admin/home#top'
+ 
  namespace :admin do
+   get  'admin' => 'admin/homes#top'
    resources :items, only: [:index, :new, :create, :show, :edit, :update]
    resources :genres, only: [:index, :create, :edit, :update]
    resources :customers, only: [:index, :show, :edit, :update]
    resources :orders, only: [:show, :update]
    resources :ordered_products, only: [:update]
  end
- 
- root to: "homes#top"
- get "/about" => "homes#about", as: "about"
+ scope module: 'public' do
+  get "/" => "homes#top"
+  get "/about" => "homes#about", as: "about"
+ end
  resources :items, only: [:index, :show]
  resources :customers, only: [:show, :edit, :update]
  get "/customers/unsubscribe" => "customers#unsubscribe" #顧客の退会確認画面
