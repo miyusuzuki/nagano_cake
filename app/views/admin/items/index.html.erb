@@ -1,0 +1,16 @@
+<h1>商品一覧</h1>
+<table class="table table-striped bg-light">
+<tr>
+  <th>商品名</th>
+  <th>税抜価格</th>
+  <th>ジャンル</th>
+  <th>ステータス</th>
+</tr>
+<% @items.each do |item| %>
+  <tr>
+    <td><%= link_to item.name, admin_item_path(item) %></td>
+    <td><%= item.price %></td>
+    <td></td>
+    <td><%= item.is_active %></td>
+  </tr>
+<% end %>
