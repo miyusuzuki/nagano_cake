@@ -17,6 +17,8 @@ class Admin::ItemsController < ApplicationController
   end
   
   def show
+    @item = Item.find(params[:id])
+    @genre = Genre.find(@item.genre_id)
   end
   
   def edit
@@ -25,7 +27,11 @@ class Admin::ItemsController < ApplicationController
   def update
   end
   
+  private
   def item_params
     params.require(:item).permit(:name, :genre_id, :price, :is_active, :image, :introduction)
+  end
+  def params_genre
+    params.require(:genre).permit(:name, :status)
   end
 end
