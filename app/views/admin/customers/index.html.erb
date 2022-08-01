@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <h5>会員一覧</h5>
+    </div>
+  </div>
+  <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <table class="table">
+            <thead>
+                <tr class="active">
+                    <th>会員ID</th>
+                    <th>氏名</th>
+                    <th>メールアドレス</th>
+                    <th>ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @customers.each do |customer| %>
+                <tr>
+                        <td><%= customer.id %></td>
+                        <td><%= link_to customer.name, admin_customer_path(customer) %></td>
+                        <td><%= customer.email %></td>
+                        <td>
+                            <% if customer.is_active == true %>
+                                有効
+                            <% else %>
+                                退会
+                            <% end %>
+                        </td>
+                </tr>
+                <% end %>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+ 
