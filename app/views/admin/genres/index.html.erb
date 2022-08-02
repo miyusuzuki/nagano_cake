@@ -10,7 +10,7 @@
 			<tr class="active">
 				<th>ジャンル名</th>
 				<th><%= f.text_field :name %></th>
-				<th><%= f.submit "新規登録",class: "btn btn-primary" %></th>
+				<th><%= f.submit "新規登録",class: "btn btn-success" %></th>
 			</tr>
 			</table>
 		</div>
@@ -30,7 +30,7 @@
 				<tr class="table-box">
 					<td><%= genre.name %></td>
 		
-					<td><%= link_to "編集する",edit_admin_genre_path(genre.id), class: "btn btn-primary" %></td>
+					<td><%= link_to "編集する",edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
 				</tr>
 				<% end %>
 			</table>
