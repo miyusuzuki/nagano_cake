@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   get "/about" => "homes#about", as: "about"
  end
  resources :items, only: [:index, :show]
- resources :customers, only: [:show, :edit, :update]
+ get "/customers/my_page" => "customers#show"
+ get "/customers/information/edit" => "customers#edit"
+ patch "/customers/information" => "customers#update"
  get "/customers/unsubscribe" => "customers#unsubscribe" #顧客の退会確認画面
  patch "/customers/withdrawal" => "customers#withdrawal" #顧客の退会処理(ステータスの更新)
  resources :cart_items, only: [:index, :update, :create, :destroy]
