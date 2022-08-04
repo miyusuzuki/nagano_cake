@@ -19,7 +19,6 @@ Rails.application.routes.draw do
  scope module: 'public' do
   get "/" => "homes#top"
   get "/about" => "homes#about", as: "about"
- end
  resources :items, only: [:index, :show]
  get "/customers/my_page" => "customers#show"
  get "/customers/information/edit" => "customers#edit"
@@ -32,5 +31,6 @@ Rails.application.routes.draw do
  post "/orders/confirm" => "orders#confirm" #注文情報確認画面
  get "/orders/complete" => "orders#complete" #注文完了画面
  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
