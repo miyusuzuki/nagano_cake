@@ -22,7 +22,7 @@
        <% end %>
     
 
-      <ul class="nav navbar-nav navbar-right">
+      <div class="d-flex justify-content-end">
         <% if customer_signed_in? %>
           <li class="nav-item">
             <%= link_to "マイページ", customers_my_page_path %>
@@ -74,7 +74,7 @@
             <%= link_to "ログイン", new_customer_session_path %>
           </li>
         <% end %>
-      </ul>
+      </>
     </nav>
   
 </header>
