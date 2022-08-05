@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-3">
+  </div>
+
+  <div class="col-xs-9">
+    <div id="slideshow">
+      <div id="container">
+        <div id="theTarget">
+          <div class="back-image1"></div>
+          <div class="back-image2"></div>
+          <div class="back-image3"></div>
+          <div class="back-image4"></div>
+        </div>
+        <div class="welcom-text">
+          <p>
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="top-item-index">
+      <h3 class="title">新着商品</h3>
+
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="item-box">
+            <% items_path do |item| %>
+             <div class="item-image">
+                <%= image_tag item.image, size: "180x120" %>
+             </div>
+             <div class="item-name text-center"><%= item.name %></div>
+             <div class="item-price text-center">¥<%= item.add_tax_price.to_s(:delimited) %></div> 
+            <% end %>
+          </div>  
+        </div>    
+      </div>
+
+      <div class="items-link text-right">
+        <%= link_to "全ての商品を見る>", items_path %>
+      </div>
+
+    </div>
+  </div>
+</div>
