@@ -26,17 +26,19 @@
       <h3 class="title">新着商品</h3>
 
       <div class="row">
-        <div class="col-xs-3">
-          <div class="item-box">
-            <% items_path do |item| %>
+            <% @items.last(4).each do |item| %>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card mb-3">
              <div class="item-image">
+               <%= link_to(item_path(item.id), class:"text-dark") do %>
                 <%= image_tag item.image, size: "180x120" %>
+               <% end %>  
              </div>
              <div class="item-name text-center"><%= item.name %></div>
              <div class="item-price text-center">¥<%= item.add_tax_price.to_s(:delimited) %></div> 
+            </div>
+            </div>
             <% end %>
-          </div>  
-        </div>    
       </div>
 
       <div class="items-link text-right">
