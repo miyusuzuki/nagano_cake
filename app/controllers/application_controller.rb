@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
             customers_my_page_path # ログイン後に遷移するpathを設定
         end
  end
-  
+
   
   private
 
