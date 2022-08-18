@@ -38,16 +38,16 @@
 	<div class="col-lg-12"><p class="pull-left"><%= @method_of_payment %></p></div>
 	<div class="col-lg-12"><h4 class="pull-left">お届け先</h4></div>
 		<% address = ''%>
-	<div class="col-lg-12"><p class="pull-left">〒
-			<%= session[:user]["shipping_postal_code"] %>
+	<div class="col-lg-12"><p class="pull-left">
+        <p>〒<%= session[:user]["shipping_postal_code"] %>
     　<%= session[:user]["shipping_address"] %></p>
-      <%= session[:user]["shipping_name"] %></p>
-		</p></div>
+    <p><%= session[:user]["shipping_name"] %></p> 
+	</div>
 			<%= f.hidden_field :customer_id , value: current_customer.id %>
 			<%= f.hidden_field :postage , value: @postage %>
 			<%= f.hidden_field :payment , value: payment %>
 			<%= f.hidden_field :address, value: address %>
-			<%= f.hidden_field :method_of_payment, value: params[:order][:method_of_payment] %>
+			<%= f.hidden_field :method_of_payment, value: @method_of_payment %>
 			<%= f.submit '購入を確定する', class: 'btn btn-success btn-lg' %>
 		<% end %>
 </div>
