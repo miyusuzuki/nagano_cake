@@ -28,14 +28,14 @@
 	</div>
 	<div class="col-lg-4">
 		<table class="table table-bordered">
-		<tr><th class="active" style="line-height: 30px;">送料</th><td style="line-height: 30px;"><%= @postage %>円</td></tr>
+		<tr><th class="active" style="line-height: 30px;">送料</th><td style="line-height: 30px;"><%= @postage.to_s(:delimited) %></td></tr>
 		<% payment = sum + @postage %>
-		<tr><th class="active" style="line-height: 30px;">合計金額</th><td style="line-height: 30px;"><%= sum %>円</td></tr>
-		<tr><th class="active" style="line-height: 30px;">請求金額</th><td style="line-height: 30px;"><%= payment %>円</td></tr>
+		<tr><th class="active" style="line-height: 30px;">合計金額</th><td style="line-height: 30px;"><%= sum.to_s(:delimited) %></td></tr>
+		<tr><th class="active" style="line-height: 30px;">請求金額</th><td style="line-height: 30px;"><%= payment.to_s(:delimited) %></td></tr>
 		</table>
 	</div>
 	<div class="col-lg-12"><h4 class="pull-left">支払方法</h4></div>
-	<div class="col-lg-12"><p class="pull-left"><%= @method_of_payment %></p></div>
+	<div class="col-lg-12"><p class="pull-left"><%= session[:user]["method_of_payment"] %></p></div>
 	<div class="col-lg-12"><h4 class="pull-left">お届け先</h4></div>
 		<% address = ''%>
 	<div class="col-lg-12"><p class="pull-left">
@@ -48,6 +48,6 @@
 			<%= f.hidden_field :payment , value: payment %>
 			<%= f.hidden_field :address, value: address %>
 			<%= f.hidden_field :method_of_payment, value: @method_of_payment %>
-			<%= f.submit '購入を確定する', class: 'btn btn-success btn-lg' %>
+			<%= link_to '購入を確定する', orders_complete_path, class: 'btn btn-success btn-lg' %>
 		<% end %>
 </div>

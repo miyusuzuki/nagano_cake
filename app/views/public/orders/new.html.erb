@@ -10,11 +10,11 @@
 		<div class="col-lg-4">
 			<div class="col-lg-5"><h4>支払方法</h4></div>
 		    <div class="col-xs-offset-1 col-lg-8">
-				<%= f.radio_button :method_of_payment, :クレジットカード, class:"pull-left"%>
+				<%= f.radio_button :method_of_payment_select, 0 %>
 				<%= f.label :method_of_payment, :クレジットカード, { class:"pull-left" ,style: "padding-left: 5px;"}%>
 			</div>
 			<div class="col-xs-offset-1 col-lg-8">
-				<%= f.radio_button :method_of_payment, :銀行振込, class:"pull-left"%>
+				<%= f.radio_button :method_of_payment_select, 1 %>
 				<%= f.label :method_of_payment, :銀行振込 ,{ class:"pull-left" ,style: "padding-left: 5px;"} %>
 			</div>
 			<div class="col-lg-5"><h4>お届け先</h4></div>
