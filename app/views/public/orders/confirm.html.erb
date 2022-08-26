@@ -1,7 +1,7 @@
 <div class="container">
 <div class="row">
 	<div class="col-lg-4">
-		<%= form_with model:@order, url: orders_confirm_path do |f|%>
+		<%= form_with model:@order_information, url: orders_confirm_path do |f| %>
 		<h5>注文情報確認</h5>
 	</div>
 </div>
@@ -43,11 +43,13 @@
     　<%= session[:user]["shipping_address"] %></p>
     <p><%= session[:user]["shipping_name"] %></p> 
 	</div>
-			<%= f.hidden_field :customer_id , value: current_customer.id %>
-			<%= f.hidden_field :postage , value: @postage %>
-			<%= f.hidden_field :payment , value: payment %>
-			<%= f.hidden_field :address, value: address %>
-			<%= f.hidden_field :method_of_payment, value: @method_of_payment %>
-			<%= link_to '購入を確定する', orders_complete_path, class: 'btn btn-success btn-lg' %>
+	        <%= f.hidden_field :customer_id, value: current_customer.id %>
+			<%= f.hidden_field :postage, value: @postage %>
+			<%= f.hidden_field :payment, value: payment %>
+			<%= f.hidden_field :postal_code, value: session[:user]["shipping_postal_code"] %>
+			<%= f.hidden_field :address, value: session[:user]["shipping_address"] %>
+			<%= f.hidden_field :name, value: session[:user]["shipping_name"] %>
+			<%= f.hidden_field :method_of_payment, value: session[:user]["method_of_payment"] %>
+			<%= f.submit '購入を確定する', class: 'btn btn-success btn-lg' %>
 		<% end %>
 </div>
