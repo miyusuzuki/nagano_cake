@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<%= form_with(url: orders_path, method: :post) do |f| %>
+	<%= form_with(model: @order,url:orders_confirm_path , local: true ) do |f| %>
 	<div class="row">
 		<div class="col-lg-4">
 			<div class="col-lg-5"><h4>支払方法</h4></div>
