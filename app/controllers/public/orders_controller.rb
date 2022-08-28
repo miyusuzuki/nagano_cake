@@ -11,6 +11,12 @@ class Public::OrdersController < ApplicationController
     @order_information = OrderInformation.new
     @addresses = Address.where(customer_id:[current_customer.id])
     @postage = 800
+    #billing_amountの計算
+     @sum = 0
+     @cart_items.each do |cart_item|
+         @sum += cart_item.item.add_tax_price * cart_item.amount
+        end 
+    @billing_amount = @sum += @postage
     session[:user] = OrderInformation.new()
     #支払方法
      if params[:method_of_payment_select] == "0"
@@ -35,27 +41,33 @@ class Public::OrdersController < ApplicationController
 	end
 	
   def complete
+    @order_information = OrderInformation.find(params[:id]) #order特定
+    @ordered_product = @order_information.ordered_products
   end
   
   def create
      @cart_items = CartItem.where(customer_id:[current_customer.id])
      @order_information = OrderInformation.new(session[:user])
      @order_information.postage = 800
-     @order_informations.billing_amount = 0
+     #billing_amountの計算
+     @sum = 0
+     @cart_items.each do |cart_item|
+         @sum += cart_item.item.add_tax_price * cart_item.amount
+        end 
+     @order_information.billing_amount = @sum += @order_information.postage
      @order_information.customer_id = current_customer.id
      @order_information.save
     # 以下、order_detail作成
-		 @cart_items = current_customer.cart_items
-		 @cart_items.each do |cart_item|
+		@cart_items = current_customer.cart_items
+		@cart_items.each do |cart_item|
 			@ordered_product = OrderedProduct.new
-			@ordered_product.order_information_id = @order_information.id
+			@ordered_product.order_informations_id = @order_information.id
 			@ordered_product.item_id = cart_item.item.id
 			@ordered_product.amount = cart_item.amount
 			@ordered_product.making_status = 0
-			@ordered_product.price = cart_item.item.add_tax_price
+			@ordered_product.price = cart_item.item.add_tax_price.floor
 			@ordered_product.save
 		end
-
 		# 購入後はカート内商品削除
 		@cart_items.destroy_all
 		redirect_to orders_complete_path
@@ -65,7 +77,7 @@ class Public::OrdersController < ApplicationController
   
   def index
     @order_informations = OrderInformation.where(customer_id:[current_customer.id])
-    @ordered_products = OrderedProduct.where(customer_id:[current_customer.id])
+    @ordered_products = OrderedProduct.all
   end
   
   def show
@@ -75,6 +87,10 @@ private
 
   def order_information_params
     params.require(:order_information).permit(:shipping_name, :shipping_postal_code, :shipping_address, :method_of_payment, :customer_id)
+  end
+  
+  def ordered_product_params
+    params.require(:ordered_product).permit(:item_id, :order_informations_id, :price, :amount, :making_status)
   end
   
 end  

@@ -6,13 +6,13 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-offset-1 col-lg-6">
-			<div class="row"><span class="orders">購入者   <small><%=link_to @order.customer.name, admin_customer_path(@order.customer) %></small></span></div>
-			<div class="row"><span class="orders">注文日   <small><%= @order.created_at %></small></span></div>
-			<div class="row"><span class="orders">配送先   <small><%= @order.shipping_postal_code %><%= @order.shipping_address %></br><%= @shipping_name %></small></span></div>
-			<div class="row"><span class="orders">支払方法    <small><%= @order.method_of_payment %></small></span></div>
+			<div class="row"><span class="orders">購入者   <small><%=link_to @order_information.customer.name, admin_customer_path(@order_information.customer) %></small></span></div>
+			<div class="row"><span class="orders">注文日   <small><%= @order_information.created_at %></small></span></div>
+			<div class="row"><span class="orders">配送先   <small><%= @order_information.shipping_postal_code %><%= @order_information.shipping_address %></br><%= @order_information.shipping_name %></small></span></div>
+			<div class="row"><span class="orders">支払方法    <small><%= @order_information.method_of_payment %></small></span></div>
 			<div class="row"><span class="orders">注文ステータス</span>
-			<%= form_with model:@order, url: admin_order_path(@order) do |f|%>
-				<%= f.select :status ,Order.statuses.keys.to_a, {},{include_blank: @order.status}  %>
+			<%= form_with model:@order, url: admin_order_path(@order_information) do |f|%>
+				<%= f.select :status ,OrderInformation.statuses.keys.to_a, {},{include_blank: @order_information.status}  %>
 				<%= f.submit '更新',class: 'btn btn-success' %>
 			<% end %></div>
 		</div>
@@ -44,8 +44,8 @@
 	</div>
 <div class="col-lg-4">
 <dl class="dl-horizontal orders">
-	<dt>商品合計</dt>  <dd><%= @order.billing_amount - @order.postage %>円</dd>
-	<dt>送料</dt>  <dd><%= @order.postage %>円</dd>
+	<dt>商品合計</dt>  <dd><%= @order.billing_amount - @order_information.postage %>円</dd>
+	<dt>送料</dt>  <dd><%= @order_information.postage %>円</dd>
 	<dt>請求合計金額</dt>  <dd><%= @order.billing_amount %>円</dd>
 </dl>
 </div>

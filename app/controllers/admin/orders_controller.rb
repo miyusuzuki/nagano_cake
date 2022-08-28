@@ -1,12 +1,12 @@
 class Admin::OrdersController < ApplicationController
   def show
-    @order = Order.find(params[:id])
-   	@ordered_products= OrderedProducts.where(order_id:[@order.id])
+    @order_information = OrderInformation.find(params[:id])
+    @ordered_products = OrderedProduct.all
   end
   
   def update
-    @order = Order.find(params[:id])
-    @order.update(order_params)
+    @order_information = OrderInformation.find(params[:id])
+    @order_information.update(order_params)
     if params[:order][:status] == "入金確認"
          @ordered_products.each do |ordered_products|
             ordered_products.update!(create_status: 1)

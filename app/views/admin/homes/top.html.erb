@@ -16,12 +16,14 @@
                 </tr>
             </thead>
             <tbody>
-              <% orders_url do |order| %>
+              <% @order_informations.each do |order_information| %>
   　　　        　　<tr>
-                  <td><%= link_to order.created_at, admin_order_path(order) %></td>
-                  <td><%= order.customers.name %></td>
-                  <td><%= order.ordered_products.sum(:amount) %></td>
-                  <td><%= order.status %></td>
+                  <td><%= link_to order_information.created_at, admin_order_path(order_information) %></td>
+                  <td><%= order_information.customer.name %></td>
+                  <% @ordered_products.each do |ordered_product| %>
+                  <td><%= ordered_products.amount %></td>
+                  <% end %>
+                  <td><%= order_information.status %></td>
                 </tr>
 　　　　　    <% end %>
             </tbody>
